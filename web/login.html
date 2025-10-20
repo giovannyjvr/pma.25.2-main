@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <script src="library.js"></script>
+        <script>
+            window.onload = loadUserInfo;
+        </script>
+    </head>
+    <body>
+        <div id="user-name"></div>
+        <div id="user-email"></div>
+        <hr>
+        <a href="login.html">Login</a> |
+        <a href="register.html">Register</a> |
+        <a href="account.html">Account</a> |
+        <a href="javascript:logout()">Logout</a> |
+        <hr>
+
+        <h1>Login User</h1>
+        <p>This is the login service.</p>
+
+        <form method="post">
+
+            <label for="accountEmail">Email:</label>
+            <input type="text" id="accountEmail" name="accountEmail" value="1berto@example.com"><br>
+
+            <label for="accountPassword">Password:</label>
+            <input type="password" id="accountPassword" name="accountPassword" value="123678"><br>
+
+            <button type="button" onclick="javascript:login();">Submit</button>
+        </form>
+    </body>
+</html>

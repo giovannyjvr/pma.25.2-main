@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <script src="library.js"></script>
+        <script>
+            window.onload = () => {
+                loadUserInfo();
+                getAccounts();
+            };
+        </script>
+    </head>
+    <body>
+        <div id="user-name"></div>
+        <div id="user-email"></div>
+        <hr>
+        <a href="login.html">Login</a> |
+        <a href="register.html">Register</a> |
+        <a href="account.html">Account</a> |
+        <a href="javascript:logout()">Logout</a> |
+        <hr>
+
+        <h1>Account Service</h1>
+        <p>This is the account service.</p>
+
+        <form action="http://localhost:8080/account" method="post">
+
+            <label for="accountName">Name:</label>
+            <input type="text" id="accountName" name="accountName" value="1berto"><br>
+
+            <label for="accountEmail">Email:</label>
+            <input type="text" id="accountEmail" name="accountEmail" value="1berto@example.com"><br>
+
+            <label for="accountPassword">Password:</label>
+            <input type="password" id="accountPassword" name="accountPassword" value="123678"><br>
+
+            <button type="button" onclick="save();">Submit</button>
+        </form>
+        <hr>
+        <div id="account-list">
+
+        </div>
+    </body>
+</html>

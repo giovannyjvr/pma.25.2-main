@@ -1,0 +1,35 @@
+name: example
+
+services:
+
+  web:
+    build:
+      dockerfile_inline: |
+        FROM nginx:latest
+        RUN apt update
+        RUN apt install -y net-tools iputils-ping
+    image: nginx:latest
+    ports:
+      - 8070:80
+    deploy:
+      replicas: 1
+
+  app:
+    image: openjdk:23-slim
+    command: tail -f /dev/null
+    deploy:
+      replicas: 1
+    environment:
+      JWT: ${JWT_SECRET}
+      EXPIRATION: ${EXPIRATION:-365}
+
+  db:
+    image: postgres:17.6
+    environment:
+      POSTGRES_USER: ${DB_USER:-store}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-store}
+      POSTGRES_DB: ${DB_NAME:-store}
+    ports:
+      - 5432:5432
+    volumes:
+      - ./volume/db:/var/lib/postgresql/data
