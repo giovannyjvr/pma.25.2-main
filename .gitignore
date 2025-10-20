@@ -29,3 +29,5 @@ replay_pid*
 volume/
 .DS_Store
 config/
+.env
+/.env
