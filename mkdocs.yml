@@ -1,0 +1,66 @@
+site_name: Portfólio - Plataformas, Microsserviços e APIs
+site_author: "Giovanny Russo"
+site_url: "https://giovannyjvr.github.io/pma.25.2"
+repo_url: "https://github.com/giovannyjvr/pma.25.2"
+repo_name: "giovannyjvr/pma.25.2"
+
+theme:
+  name: material
+  language: pt-BR
+  palette:
+    - scheme: default
+      primary: grey
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Modo escuro
+    - scheme: slate
+      primary: grey
+      toggle:
+        icon: material/toggle-switch
+        name: Modo claro
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.footer
+    - content.code.copy
+    - toc.integrate
+    - search.suggest
+    - content.action.edit
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+nav:
+  - Início: index.md
+  - Exercícios:
+    - "1. Product API": exercicio1.md
+    - "2. Order API": exercicio2.md
+    - "3. Exchange API": exercicio3.md
+    - "4. Jenkins / CI-CD": exercicio4.md
+    - "5. MiniKube / K8s local": exercicio5.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - attr_list
+  - def_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
