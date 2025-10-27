@@ -11,7 +11,7 @@
 
 | Microservice  | Interface (API / Endpoint Público)                              | Implementação                                                              |
 |---------------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| Auth    | [Auth](https://https://github.com/giovannyjvr/pma.25.2-auth) | [Auth-Service](https://github.com/giovannyjvr/pma.25.2-auth-service)|
+| Auth    | [Auth](https://github.com/giovannyjvr/pma.25.2-auth) | [Auth-Service](https://github.com/giovannyjvr/pma.25.2-auth-service)|
 | Account | [Account](https://github.com/giovannyjvr/pma.25.2-store.account) |[Account-Service](https://github.com/giovannyjvr/pma.25.2-store.account-service)|
 | Order | [Order](https://github.com/giovannyjvr/pma.25.2-order)| [Order-Service](https://github.com/giovannyjvr/pma.25.2-order-service)|
 | Product | [Product](https://github.com/giovannyjvr/pma.25.2-product-)| [Product-Service](https://github.com/giovannyjvr/pma.25.2-product-service)|

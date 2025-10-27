@@ -318,6 +318,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Sobre mim 👩‍💻">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura-de-microsservicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitetura de Microsserviços
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -534,11 +549,51 @@ A ideia é mostrar o que eu construí, como implementei cada serviço e evidênc
 </div>
 <h2 id="sobre-mim">Sobre mim 👩‍💻<a class="headerlink" href="#sobre-mim" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Nome: SEU NOME AQUI  </li>
-<li>Semestre / Grupo: COLOCAR AQUI  </li>
-<li>Repositórios envolvidos: COLOCAR LINKS AQUI  </li>
+<li>Nome: Giovanny Russo </li>
 <li>Stack principal: Spring Boot, Python (FastAPI), Docker, Jenkins, Kubernetes.</li>
 </ul>
+<h3 id="arquitetura-de-microsservicos">Arquitetura de Microsserviços<a class="headerlink" href="#arquitetura-de-microsservicos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Microservice</th>
+<th>Interface (API / Endpoint Público)</th>
+<th>Implementação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Auth</td>
+<td><a href="https://https://github.com/giovannyjvr/pma.25.2-auth">Auth</a></td>
+<td><a href="https://github.com/giovannyjvr/pma.25.2-auth-service">Auth-Service</a></td>
+</tr>
+<tr>
+<td>Account</td>
+<td><a href="https://github.com/giovannyjvr/pma.25.2-store.account">Account</a></td>
+<td><a href="https://github.com/giovannyjvr/pma.25.2-store.account-service">Account-Service</a></td>
+</tr>
+<tr>
+<td>Order</td>
+<td><a href="https://github.com/giovannyjvr/pma.25.2-order">Order</a></td>
+<td><a href="https://github.com/giovannyjvr/pma.25.2-order-service">Order-Service</a></td>
+</tr>
+<tr>
+<td>Product</td>
+<td><a href="https://github.com/giovannyjvr/pma.25.2-product-">Product</a></td>
+<td><a href="https://github.com/giovannyjvr/pma.25.2-product-service">Product-Service</a></td>
+</tr>
+<tr>
+<td>Gateway</td>
+<td></td>
+<td><a href="https://github.com/giovannyjvr/pma.25.2-gateway-service">Gateway</a></td>
+</tr>
+<tr>
+<td>Exchange</td>
+<td></td>
+<td><a href="https://github.com/giovannyjvr/exchange-api">Exchange</a></td>
+</tr>
+</tbody>
+</table>
 <h2 id="visao-geral-da-arquitetura">Visão Geral da Arquitetura<a class="headerlink" href="#visao-geral-da-arquitetura" title="Permanent link">&para;</a></h2>
 <p>A disciplina trabalha com uma arquitetura baseada em microsserviços (account-service, auth-service, product-service, order-service, exchange-service), um API Gateway e um banco de dados.<br />
 Cada microsserviço é isolado, mas todos se conversam via HTTP dentro de uma camada "confiável" (Trusted Layer).</p>
