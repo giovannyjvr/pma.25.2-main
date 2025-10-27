@@ -3,7 +3,7 @@ name: deploy-docs
 on:
   push:
     branches:
-      - main
+      - main   # <-- TROCA ESSE NOME se sua branch principal NÃO for 'main'
 
 permissions:
   contents: write
@@ -22,7 +22,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-            python-version: ${{ env.PYTHON_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install deps
         run: pip install -r requirements.txt
