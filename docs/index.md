@@ -5,10 +5,18 @@
     A ideia é mostrar o que eu construí, como implementei cada serviço e evidências (prints / logs / comandos).
 
 ## Sobre mim 👩‍💻
-- Nome: SEU NOME AQUI  
-- Semestre / Grupo: COLOCAR AQUI  
-- Repositórios envolvidos: COLOCAR LINKS AQUI  
+- Nome: Giovanny Russo 
 - Stack principal: Spring Boot, Python (FastAPI), Docker, Jenkins, Kubernetes.
+### Arquitetura de Microsserviços
+
+| Microservice  | Interface (API / Endpoint Público)                              | Implementação                                                              |
+|---------------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| Auth    | [Auth](https://https://github.com/giovannyjvr/pma.25.2-auth) | [Auth-Service](https://github.com/giovannyjvr/pma.25.2-auth-service)|
+| Account | [Account](https://github.com/giovannyjvr/pma.25.2-store.account) |[Account-Service](https://github.com/giovannyjvr/pma.25.2-store.account-service)|
+| Order | [Order](https://github.com/giovannyjvr/pma.25.2-order)| [Order-Service](https://github.com/giovannyjvr/pma.25.2-order-service)|
+| Product | [Product](https://github.com/giovannyjvr/pma.25.2-product-)| [Product-Service](https://github.com/giovannyjvr/pma.25.2-product-service)|
+| Gateway |         | [Gateway](https://github.com/giovannyjvr/pma.25.2-gateway-service)|
+| Exchange |           | [Exchange](https://github.com/giovannyjvr/exchange-api)|
 
 ## Visão Geral da Arquitetura
 
