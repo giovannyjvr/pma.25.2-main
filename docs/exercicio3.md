@@ -1,26 +1,57 @@
+# Exercício 3 · Exchange API
+
+!!! summary "Objetivo oficial"
+    Criar um microsserviço independente para realizar conversão entre moedas,  
+    utilizando dados de uma API externa ou fonte local.  
+    A API deve permitir consultar a taxa de câmbio entre duas moedas  
+    e converter valores com base nessa taxa.  
+    O acesso à API deve ser feito via Gateway com autenticação.
 
 ---
 
-### 10. `docs/exercicio3.md`
+### Links dos repositórios
 
-```markdown
-# Exercício 3 · Exchange API (Python)
+[Exchange](https://github.com/giovannyjvr/exchange-api)  
 
-!!! tip "Objetivo oficial"
-    Criar um microsserviço de câmbio que converte moedas (`exchange-service`).  
-    Esse serviço **tem que ser em Python** e deve consumir uma API externa de taxas de câmbio (por ex. AwesomeAPI, ExchangeRate-API etc.).  
-    Ele expõe um endpoint REST tipo `GET /exchange/{from}/{to}` que devolve a taxa de conversão e metadados (data, id da conta, etc.).  
-    (Baseado no enunciado "3. Exchange API")  
-    Referência: https://insper.github.io/platform/exercises/exchange/
+---
 
-## O que eu implementei
-- Serviço `exchange-service` escrito em Python (FastAPI).
-- Endpoint principal:
-  - `GET /exchange/{from}/{to}` → retorna quanto vale 1 unidade da moeda `{from}` em `{to}`.
-- Esse serviço faz chamada HTTP para uma API externa de câmbio em tempo real.
-- O gateway encaminha a chamada autenticada para o `exchange-service`.
+## O que foi implementado
 
-```mermaid
-flowchart LR
-    gateway[API Gateway] --> exchange[exchange-service (Python)]
-    exchange --> extAPI[(3rd-party FX API)]
+Implementei o microsserviço `exchange-api`, responsável por realizar operações de câmbio (conversão de valores entre moedas) no ecossistema da aplicação.
+
+Este serviço cumpre integralmente os requisitos propostos no exercício:
+
+- Permite:
+  - **Consultar a taxa de câmbio** entre duas moedas específicas;
+  - **Converter** um valor de uma moeda para outra usando a taxa correspondente.
+
+- A API expõe dois endpoints principais:
+  - Um `GET` para retornar a taxa atual entre duas moedas;
+  - Um `POST` para realizar a conversão de valores.
+
+- O serviço pode usar:
+  - **Uma API externa de câmbio**, como fonte de taxa (Ex: OpenExchange, AwesomeAPI, etc);
+  - Ou uma **tabela local simulada** de taxas (em modo offline/teste).
+
+- O acesso à API está protegido via **Gateway**, que realiza a autenticação por JWT antes de encaminhar as requisições.
+
+---
+
+## Endpoints implementados
+
+Todos os endpoints seguem o prefixo base `/exchange`.
+
+| Método HTTP | Rota                             | Função                                               |
+|-------------|----------------------------------|------------------------------------------------------|
+| `GET`       | `/exchange/rate?from=USD&to=BRL` | Retorna a taxa de câmbio da moeda `from` para `to`. |
+| `POST`      | `/exchange/convert`              | Recebe um valor e converte de `from` para `to`.     |
+
+---
+
+### Exemplo de uso
+
+#### `GET /exchange/rate`
+
+```http
+GET /exchange/rate?from=USD&to=EUR
+Authorization: Bearer <token>
