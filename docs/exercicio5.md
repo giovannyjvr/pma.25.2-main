@@ -1,4 +1,3 @@
-
 # Exercício · Minikube / Kubernetes Local
 
 !!! summary "Objetivo oficial"
@@ -7,36 +6,45 @@
 
 ---
 
-## O que foi implementado
+## ✅ O que foi implementado
 
-Para este exercício, todos os microsserviços foram adaptados para rodar em um cluster Kubernetes local ou equivalente. Em particular:
+Todos os microsserviços foram adaptados para rodar corretamente em um cluster Kubernetes local (via **Minikube**). Os principais pontos implementados foram:
 
-- Foram criados **manifests YAML** de `Deployment` e `Service` para cada microsserviço (ex: `order‑service`, `product‑service`, etc).  
-- Cada serviço segue a boa prática de containerização, apontando para sua imagem Docker (ex: `giovannyjvr/order:latest`).  
-- As aplicações foram configuradas para buscar suas variáveis de ambiente via `ConfigMap` e `Secret` em Kubernetes (por ex: `POSTGRES_DB`, `DATABASE_URL`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`).  
-- Configuração de recursos (`requests` e `limits`) foi aplicada para cada `Deployment`, garantindo uso responsável de CPU/memória.  
-- Os microsserviços foram implantados em Minikube ou cluster local para validar que a infraestrutura de microsserviços funciona em orquestrador real.  
-- Os serviços se comunicam entre si internamente no cluster, usando os nomes DNS dos Services (ex: `order-service` → `product-service`) e o `gateway-service` atua como interface de entrada externa.
+- **Manifests YAML completos** (`Deployment` + `Service`) para cada microsserviço.
+- Uso de imagens Docker customizadas publicadas no DockerHub (ex: `giovannyjvr/order:latest`).
+- Configuração de variáveis de ambiente via `ConfigMap` e `Secret`, permitindo segurança e flexibilidade.
+- Recursos limitados por container (`cpu` e `memória`) para controle de consumo.
+- Comunicação entre microsserviços feita por nomes DNS internos (ex: `product-service`, `auth-service`, etc).
+- Exposição do `gateway-service` como ponto de entrada externo via `NodePort`.
 
 ---
-repositórios ativados: 
-| Microservice  |Implementação                                                              |
-|---------------------|-----------------------------------------------------------------|
-| Auth    | [Auth-Service](https://github.com/giovannyjvr/pma.25.2-auth-service)|
-| Account | [Account-Service](https://github.com/giovannyjvr/pma.25.2-store.account-service)|
-| Order | [Order-Service](https://github.com/giovannyjvr/pma.25.2-order-service)|
-| Product | [Product-Service](https://github.com/giovannyjvr/pma.25.2-product-service)|
-| Gateway | [Gateway](https://github.com/giovannyjvr/pma.25.2-gateway-service)|
 
-Exemplo de estrutura feita:
-```text
+## 📦 Repositórios ativados
+
+| Microsserviço | Repositório GitHub |
+|---------------|---------------------|
+| Auth          | [Auth-Service](https://github.com/giovannyjvr/pma.25.2-auth-service) |
+| Account       | [Account-Service](https://github.com/giovannyjvr/pma.25.2-store.account-service) |
+| Order         | [Order-Service](https://github.com/giovannyjvr/pma.25.2-order-service) |
+| Product       | [Product-Service](https://github.com/giovannyjvr/pma.25.2-product-service) |
+| Gateway       | [Gateway-Service](https://github.com/giovannyjvr/pma.25.2-gateway-service) |
+
+---
+
+## 📁 Estrutura de arquivos
+
+Cada serviço possui um diretório `k8s/` contendo o manifest:
+
+```
 api/
 └── account-service/
     └── k8s/
         └── k8s.yaml
 ```
 
-## Exemplo de manifest YAML (Order Service)
+---
+
+## 📄 Exemplo de manifest (Order Service)
 
 ```yaml
 apiVersion: apps/v1
@@ -84,9 +92,7 @@ spec:
             limits:
               memory: "300Mi"
               cpu: "200m"
-
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -101,3 +107,4 @@ spec:
       targetPort: 8080
   selector:
     app: order
+```
