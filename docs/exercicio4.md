@@ -1,34 +1,41 @@
-Perfeito! Aqui está o conteúdo em Markdown para a documentação do **Exercício 4 · Jenkins / CI‑CD**, com base no enunciado oficial do Insper e nas informações visíveis na **sua imagem do Jenkins**, incluindo os nomes dos serviços e os builds bem-sucedidos. Também incluí exemplos reais dos arquivos usados em cada repositório.
-
----
-
-````markdown
 # Exercício 4 · Jenkins / CI‑CD
 
 !!! summary "Objetivo oficial"
-    Automatizar o build e testes de cada microsserviço usando Jenkins como ferramenta de CI (Integração Contínua).  
-    Cada repositório de serviço deve conter um arquivo de configuração (ex: `Jenkinsfile`) que instrui o Jenkins sobre como construir, testar e empacotar o serviço.  
-    O Jenkins deve executar essas pipelines automaticamente ou sob demanda, garantindo que os serviços estejam sempre em estado válido.
+    Automatizar o processo de build, teste e empacotamento de todos os microsserviços da aplicação, utilizando o Jenkins como ferramenta de Integração Contínua (CI).  
+    Cada repositório deve conter um arquivo `Jenkinsfile` que descreve as etapas do pipeline de build e geração de imagens Docker, garantindo que o sistema permaneça estável e funcional a cada alteração no código.
+
+---
+
+### Links dos repositórios
+
+[Product-Service](https://github.com/giovannyjvr/pma.25.2-product-service)  
+[Order-Service](https://github.com/giovannyjvr/pma.25.2-order-service)  
+[Auth-Service](https://github.com/giovannyjvr/pma.25.2-auth-service)  
+[Account-Service](https://github.com/giovannyjvr/pma.25.2-account-service)  
+[Gateway-Service](https://github.com/giovannyjvr/pma.25.2-gateway-service)  
+[Exchange-API](https://github.com/giovannyjvr/exchange-api)
 
 ---
 
 ## O que foi implementado
 
-Configurei a automação de build para **todos os microsserviços** do sistema via Jenkins.  
-Cada repositório (como `product-service`, `order-service`, `auth-service`, etc.) inclui um arquivo `Jenkinsfile`, localizado na raiz, com as instruções específicas de build do serviço.
+Implementei a automação de build e deploy contínuo para **todos os microsserviços** do sistema.  
+Cada repositório possui seu próprio **`Jenkinsfile`**, responsável por definir as etapas de compilação, teste e geração da imagem Docker do serviço.
 
-O Jenkins está configurado localmente na porta `http://localhost:9080` e executa os pipelines de forma independente para cada serviço, garantindo:
+O Jenkins foi configurado localmente em `http://localhost:9080`, e cada microsserviço possui uma pipeline independente, garantindo:
 
-- **Build limpo** de cada serviço (ex: via `mvn clean install` ou `docker build`)
-- **Testes** unitários (quando disponíveis)
-- **Pipeline simples e clara**, com feedback visual da execução
-- **Histórico de builds**, incluindo últimos sucessos e falhas
+- **Build automatizado:** compilação e empacotamento do código-fonte em container Docker;  
+- **Testes automatizados:** execução dos testes unitários (quando aplicável) antes de gerar a imagem;  
+- **Feedback visual:** monitoramento de sucesso/falha diretamente na interface do Jenkins;  
+- **Histórico de builds:** registro das últimas execuções com status e logs acessíveis;  
+- **Isolamento entre serviços:** cada pipeline é executada separadamente, evitando interferência entre builds.
 
 ---
 
-## Estrutura do Jenkinsfile (exemplo real)
+## Estrutura do `Jenkinsfile`
 
-### Exemplo: `product-service/Jenkinsfile`
+Cada repositório inclui um arquivo `Jenkinsfile` na raiz, que descreve as etapas de build.  
+Abaixo um exemplo real do `product-service`:
 
 ```groovy
 pipeline {
@@ -46,63 +53,60 @@ pipeline {
                 sh 'docker build -t product-service .'
             }
         }
+
+        stage('Publish') {
+            steps {
+                echo 'Build finalizado com sucesso!'
+            }
+        }
     }
 }
-````
 
-Esse `Jenkinsfile` realiza duas etapas principais:
-
-* Compila o código com Maven
-* Gera uma imagem Docker para o serviço
-
-A estrutura pode variar levemente de serviço para serviço (por exemplo, serviços em Python não usam `mvn`, e sim `pip`, `pytest`, etc.), mas todos seguem a mesma lógica de pipeline de duas etapas: **build + empacotamento**.
-
----
-
-## Organização dos repositórios
 
 Cada microsserviço contém:
 
-* `Dockerfile`: para criar imagem do serviço
-* `Jenkinsfile`: descreve o pipeline automatizado
-* `src/`: código-fonte da aplicação
+* **`Dockerfile`** → descreve a criação da imagem do serviço;
+* **`Jenkinsfile`** → define o pipeline de build automatizado;
+* **`src/`** → contém o código-fonte principal do serviço;
+* **`pom.xml`** ou **`requirements.txt`** → define as dependências do projeto.
 
-Repositórios com pipeline funcional:
-
-| Serviço         | Jenkinsfile | Dockerfile | Status |
-| --------------- | ----------- | ---------- | ------ |
-| product-service | ✅           | ✅          | ✅      |
-| order-service   | ✅           | ✅          | ✅      |
-| auth-service    | ✅           | ✅          | ✅      |
-| account-service | ✅           | ✅          | ✅      |
-| gateway-service | ✅           | ✅          | ✅      |
-| exchange-api    | ✅           | ✅          | ✅      |
+| Microsserviço   | Jenkinsfile | Dockerfile | Status no Jenkins |
+| --------------- | ----------- | ---------- | ----------------- |
+| Product-Service | ✅           | ✅          | ✅ Build estável   |
+| Order-Service   | ✅           | ✅          | ✅ Build estável   |
+| Auth-Service    | ✅           | ✅          | ✅ Build estável   |
+| Account-Service | ✅           | ✅          | ✅ Build estável   |
+| Gateway-Service | ✅           | ✅          | ✅ Build estável   |
+| Exchange-API    | ✅           | ✅          | ✅ Build estável   |
 
 ---
 
-## Visão do Jenkins
+## Execução e monitoramento
 
-A imagem abaixo mostra o Jenkins com todas as pipelines dos microsserviços configuradas e executadas com sucesso:
+Após o push de cada repositório no GitHub, o Jenkins executa automaticamente a pipeline correspondente.
+Cada build gera logs e resultados detalhados, podendo ser reexecutado manualmente caso necessário.
 
-![Screenshot do Jenkins mostrando pipelines bem-sucedidas](./assets/images/ex4.png)
+A tela principal do Jenkins mostra todas as pipelines configuradas:
 
-* Ícones ☀️ indicam builds estáveis
-* Cada linha representa um microsserviço
-* A coluna “Último Sucesso” confirma que todos os serviços passaram pelos últimos testes e builds
+![Pipelines do Jenkins](./assets/images/ex4.png)
+
+* Cada linha representa um microsserviço independente;
+* O ícone ☀️ indica build estável e sem falhas recentes;
+* A coluna **“Último Sucesso”** confirma o build mais recente concluído corretamente;
+* A coluna **“Última Falha”** registra quando o serviço apresentou erro (antes da correção).
 
 ---
 
 ## Observações finais
 
-A entrega cumpre todos os requisitos do exercício:
+O ambiente de **CI/CD** foi configurado com sucesso:
 
-* Todos os serviços possuem `Jenkinsfile`
-* Jenkins consegue buildar e testar todos com sucesso
-* Pipelines são simples, reutilizáveis e seguem boas práticas
-* Serviços com falhas passadas estão com status recuperado após correção
-* Jenkins está acessível via `localhost:9080` com histórico completo de builds
+* Todos os microsserviços possuem `Jenkinsfile` funcional;
+* Jenkins realiza build e validação automática de cada serviço;
+* Pipelines são simples, limpas e seguem boas práticas de Integração Contínua;
+* O histórico de builds demonstra estabilidade e correção de falhas passadas.
 
-Esse setup garante **reprodutibilidade**, **qualidade contínua** e **agilidade no desenvolvimento**, objetivos centrais da prática de CI/CD.
+Essa implementação garante **reprodutibilidade, automação e qualidade contínua** em todas as etapas do desenvolvimento da aplicação.
 
 ```
 
