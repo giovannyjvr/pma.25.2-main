@@ -11,7 +11,7 @@
 [Product-Service](https://github.com/giovannyjvr/pma.25.2-product-service)  
 [Order-Service](https://github.com/giovannyjvr/pma.25.2-order-service)  
 [Auth-Service](https://github.com/giovannyjvr/pma.25.2-auth-service)  
-[Account-Service](https://github.com/giovannyjvr/pma.25.2-account-service)  
+[Account-Service](https://github.com/giovannyjvr/pma.25.2-store.account-service)  
 [Gateway-Service](https://github.com/giovannyjvr/pma.25.2-gateway-service)  
 [Exchange-API](https://github.com/giovannyjvr/exchange-api)
 
